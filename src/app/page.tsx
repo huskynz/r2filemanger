@@ -29,19 +29,31 @@ async function listObjects() {
 async function uploadObject(data: FormData) {
   'use server'
   
-  const file = data.get('file') as File
-  if (!file) {
-    throw new Error('No file provided')
+  try {
+    const file = data.get('file') as File
+    if (!file) {
+      throw new Error('No file provided')
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer())
+    
+    if (buffer.length > 10 * 1024 * 1024) { // 10MB limit
+      throw new Error('File size too large. Maximum size is 10MB')
+    }
+
+    const command = new PutObjectCommand({
+      Bucket: process.env.R2_BUCKET_NAME,
+      Key: file.name,
+      Body: buffer,
+      ContentType: file.type,
+    })
+
+    await s3Client.send(command)
+    revalidatePath('/')
+  } catch (error) {
+    console.error('Upload error:', error)
+    throw new Error(error instanceof Error ? error.message : 'Failed to upload file')
   }
-
-  const command = new PutObjectCommand({
-    Bucket: process.env.R2_BUCKET_NAME,
-    Key: file.name,
-    Body: Buffer.from(await file.arrayBuffer()),
-  })
-
-  await s3Client.send(command)
-  revalidatePath('/')
 }
 
 async function deleteObject(key: string) {
