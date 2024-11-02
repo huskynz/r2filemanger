@@ -88,7 +88,7 @@ export default async function Page() {
   return (
     <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
       <center><img src="https://serv.husky.nz/logo/default.png" className='w-16 h-16 mb-6'></img>
-      <h1 className="text-2xl font-bold mb-6">R2 Bucket Manager</h1></center>
+      <h1 className="text-2xl font-bold mb-6">HuskyNZ's R2 Bucket Manager</h1></center>
       <UploadForm uploadObject={uploadObject} />
       <div className="mt-8">
         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
