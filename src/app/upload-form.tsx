@@ -9,7 +9,7 @@ export default function UploadForm({ uploadObject }: { uploadObject: (formData: 
     <form action={uploadObject} className="flex items-center space-x-4 mb-6">
       <input
         type="file"
-        onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
+        onChange={(e) => setSelectedFile(e.target.files?.[0] ?? null)}
         name="file"
         className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
       />
