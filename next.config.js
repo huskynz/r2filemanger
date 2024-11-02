@@ -12,6 +12,10 @@ const config = {
         source: '/:path*',
         headers: [
           {
+            key: 'Access-Control-Allow-Credentials',
+            value: 'true'
+          },
+          {
             key: 'Access-Control-Allow-Origin',
             value: '*'
           },
@@ -25,7 +29,7 @@ const config = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self' https://*.cloudflareinsights.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com; img-src 'self' https://serv.husky.nz data:; style-src 'self' 'unsafe-inline';"
+            value: "default-src 'self' https://*.cloudflareinsights.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.cloudflareinsights.com; img-src 'self' https://serv.husky.nz data:; style-src 'self' 'unsafe-inline'; connect-src 'self' *;"
           }
         ]
       }
