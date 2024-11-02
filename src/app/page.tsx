@@ -21,7 +21,7 @@ async function listObjects() {
 
   return response.Contents?.map((object) => ({
     key: object.Key,
-    lastModified: object.LastModified,
+    lastModified: object.LastModified?.toISOString(),
     size: object.Size,
   })) || []
 }
